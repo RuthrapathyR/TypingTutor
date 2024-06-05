@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    #frame {
+      width: 800px;
+      height: fit-content;
+      padding: 10px 0px;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      /* border: solid;   */
+      border-radius: 20px;
+      background-color: #D9DADB;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #frame div {
+      width: 50px;
+      height: 50px;
+      /* border: solid; */
+      padding: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      background-color: white;
+      font-size: 1.05em;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .twidth {
+      width: 80px;
+    }
+
+    .superior {
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #cont {
+      border: solid;
+      font-size: 2.25em;
+      width: 800px;
+      height: 300px;
+      border-radius: 10px;
+      overflow-y: scroll;
+      word-wrap: break-word;
+    }
+
+    #cont::-webkit-scrollbar {
+      display: none;
+    }
+
+    .transtart {
+      transform: scale(1.5);
+    }
+
+    #usrinp {
+      display: flex;
+      border: solid;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      font-size: 1.5em;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    #usrinp input {
+      text-align: center;
+      font-size: 0.95em;
+      font-weight: 800;
+    }
+
+    #usrinp button {
+      padding: 10px;
+      background-color: black;
+      color: white;
+      font-size: 0.8em;
+      font-weight: 800;
+      border: none;
+      border-radius: 10px;
+    }
+
+    #accur,
+    #spd {
+      font-weight: 900;
+      font-size: 1.5em;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="usrinp">
+    <input type="number" name="" id="noofPar">
+    <button type="button" id="gencont">GENERATE</button>
+    <div>Accuracy&nbsp;<label id="accur"></label> &nbsp;%</div>
+    <!-- <div>Speed&nbsp;<div id="spd"></div>&nbsp;wpm</div> -->
+  </div>
+  <div id="cont">
+  </div>
+  <div id="frame">
+    <div class="sduperior">
+      <p>~</p>
+      <p>`</p>
+    </div>
+    <div class="superior" data-key="1">
+      <p>!</p>
+      <p>1</p>
+    </div>
+    <div class="superior" data-key="2">
+      <p>@</p>
+      <p>2</p>
+    </div>
+    <div class="superior" data-key="3">
+      <p>#</p>
+      <p>3</p>
+    </div>
+    <div class="superior" data-key="4">
+      <p>$</p>
+      <p>4</p>
+    </div>
+    <div class="superior" data-key="5">
+      <p>%</p>
+      <p>5</p>
+    </div>
+    <div class="superior" data-key="6">
+      <p>^</p>
+      <p>6</p>
+    </div>
+    <div class="superior" data-key="7">
+      <p>&</p>
+      <p>7</p>
+    </div>
+    <div class="superior" data-key="8">
+      <p>*</p>
+      <p>8</p>
+    </div>
+    <div class="superior" data-key="9">
+      <p>(</p>
+      <p>9</p>
+    </div>
+    <div class="superior" data-key="0">
+      <p>)</p>
+      <p>0</p>
+    </div>
+    <div class="superior" data-key="sub">
+      <p>_</p>
+      <p>-</p>
+    </div>
+    <div class="superior" data-key="plus">
+      <p>+</p>
+      <p>=</p>
+    </div>
+    <div class="twidth" data-key="del">delete</div>
+    <div class="twidth" data-key="tab">tab</div>
+    <div data-key="q">
+      <p>Q</p>
+    </div>
+    <div data-key="w">
+      <p>W</p>
+    </div>
+    <div data-key="e">
+      <p>E</p>
+    </div>
+    <div data-key="r">
+      <p>R</p>
+    </div>
+    <div data-key="t">
+      <p>T</p>
+    </div>
+    <div data-key="y">
+      <p>Y</p>
+    </div>
+    <div data-key="u">
+      <p>U</p>
+    </div>
+    <div data-key="i">
+      <p>I</p>
+    </div>
+    <div data-key="o">
+      <p>O</p>
+    </div>
+    <div data-key="p">
+      <p>P</p>
+    </div>
+    <div class="superior" data-key="s[">
+      <p>{</p>
+      <p>[</p>
+    </div>
+    <div class="superior" data-key="s]">
+      <p>}</p>
+      <p>]</p>
+    </div>
+    <div class="superior" data-key="s\">
+      <p>|</p>
+      <p>\</p>
+    </div>
+    <div class="twidth" style="width: 80px;" data-key="capslk">caps lock</div>
+    <div data-key="a">
+      <p>A</p>
+    </div>
+    <div data-key="s">
+      <p>S</p>
+    </div>
+    <div data-key="d">
+      <p>D</p>
+    </div>
+    <div data-key="f">
+      <p>F</p>
+    </div>
+    <div data-key="g">
+      <p>G</p>
+    </div>
+    <div data-key="h">
+      <p>H</p>
+    </div>
+    <div data-key="j">
+      <p>J</p>
+    </div>
+    <div data-key="k">
+      <p>K</p>
+    </div>
+    <div data-key="l">
+      <p>L</p>
+    </div>
+    <div class="superior" data-key=";">
+      <p>:</p>
+      <p>;</p>
+    </div>
+    <div class="superior" data-key="'">
+      <p>"</p>
+      <p>'</p>
+    </div>
+    <div class="twidth" style="width: 80px;" data-key="enter">enter</div>
+    <div class="twidth" style="width:107px ;" data-key="sft">shift</div>
+    <div data-key="z">
+      <p>Z</p>
+    </div>
+    <div data-key="x">
+      <p>X</p>
+    </div>
+    <div data-key="c">
+      <p>C</p>
+    </div>
+    <div data-key="v">
+      <p>V</p>
+    </div>
+    <div data-key="b">
+      <p>B</p>
+    </div>
+    <div data-key="n">
+      <p>N</p>
+    </div>
+    <div data-key="m">
+      <p>M</p>
+    </div>
+    <div class="superior" data-key="comma">
+      <p>
+        &#x3C;
+      </p>
+      <p>,</p>
+    </div>
+    <div class="superior" data-key="dot">
+      <p>></p>
+      <p>.</p>
+    </div>
+    <div class="superior" data-key="sq">
+      <p>?</p>
+      <p>/</p>
+    </div>
+    <div class="twidth" style="width:107px ;" data-key="sft">
+      <p>shift</p>
+    </div>
+    <div class="twidth" data-key="ctrl">
+      <p>ctrl</p>
+    </div>
+    <div class="twidth" data-key="alt">
+      <p>alt</p>
+    </div>
+    <div class="twidth" data-key="cmd">
+      <p>cmd</p>
+    </div>
+    <div style="width: 300px;" data-key="spc">
+      <p></p>
+    </div>
+    <div class="twidth" data-key="cmd">
+      <p>cmd</p>
+    </div>
+    <div class="twidth" data-key="alt">
+      <p>alt</p>
+    </div>
+    <div class="twidth" data-key="ctrl">
+      <p>ctrl</p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script>
+
+
+    const generateCont=document.getElementById("gencont");
+const contentBox=document.getElementById("cont");
+const numberOfPara=document.getElementById("noofPar");
+const Acuuracyy=document.getElementById("accur");
+// const wordSpeedd=document.getElementById("spd");
+let contentlist=[]
+generateCont.addEventListener("click",async ()=>{
+    Acuuracyy.innerText=""
+    // wordSpeedd.innerText=""
+    contentlist=await getPara(numberOfPara.value)
+    console.log(contentlist);
+    contentBox.innerHTML=""
+    for (let i = 0; i < contentlist.length; i++) {
+        contentBox.innerHTML+=contentlist[i]+'<br><br>'
+    }
+})
+function getPara(n){
+    let url=`https://baconipsum.com/api/?type=all-meat&paras=${n}&start-with-lorem=2`
+    return fetchContent(url)
+}
+async function fetchContent(url){
+    let response=await fetch(url);
+    if(response.status==200){
+        let data= response.json();
+        return data
+    }else{
+        alert("An error occured")
+    }
+}
+    
+    const content = document.getElementById("cont");
+    let fcnt = content.innerText.length
+    const Acuuracy = document.getElementById("accur");
+    // const wordSpeed=document.getElementById("spd")
+    let tempData = ""
+    let count = 0
+    let wrgCount = 1
+    let scrollCount = 0
+    let mins = 1
+    let inmins = 0
+    let counttimer = "";
+    document.body.addEventListener("keypress", (ele) => {
+
+      console.log(wrgCount + count + "ff");
+      if (wrgCount + count >= 1) {
+        console.log("gg");
+        let start = new Date().getTime();
+        let counttimer = setInterval(() => {
+          let ct = new Date().getTime();
+          let td = (ct - start) / (1000 * 60);
+          let spd = ((count + wrgCount) / 5) / td;
+          wordSpeed.innerText = spd.toFixed(1);
+          console.log(wordSpeed.innerText);
+        }, 1500)
+
+        Acuuracy.innerText = (count / (count + wrgCount) * 100).toFixed(1);
+        tempData = content.innerText.substring(0, count + 1)
+        if (count % 65 == 0 && count != 0) {
+          console.log("d");
+          content.scrollTo(0, 25 * scrollCount)
+          scrollCount++
+        }
+        if (count >= fcnt) {
+          clearInterval(counttimer)
+        }
+        if (ele.key == " ") {
+          ele.preventDefault();
+          document.querySelector(`[data-key=spc]`).classList.add("transtart")
+          document.querySelector(`[data-key=spc]`).style.backgroundColor = "#3295DB"
+        } else {
+          if (ele.key == ",") {
+            document.querySelector(`[data-key=comma]`).classList.add("transtart")
+            document.querySelector(`[data-key=comma]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "-" || ele.key == "_") {
+            console.log("j");
+            document.querySelector(`[data-key=sub]`).classList.add("transtart")
+            document.querySelector(`[data-key=sub]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "+" || ele.key == "+") {
+            console.log("j");
+            document.querySelector(`[data-key=plus]`).classList.add("transtart")
+            document.querySelector(`[data-key=plus]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "[" || ele.key == "{") {
+            console.log("j");
+            document.querySelector(`[data-key=s[]]`).classList.add("transtart")
+            document.querySelector(`[data-key=s[]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "]" || ele.key == "}") {
+            console.log("j");
+            document.querySelector(`[data-key=s]]`).classList.add("transtart")
+            document.querySelector(`[data-key=s]]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "," || ele.key == "<") {
+            console.log("j");
+            document.querySelector(`[data-key=comma]`).classList.add("transtart")
+            document.querySelector(`[data-key=comma]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "." || ele.key == ">") {
+            document.querySelector(`[data-key=dot]`).classList.add("transtart")
+            document.querySelector(`[data-key=dot]`).style.backgroundColor = "#3295DB"
+          }
+          if (ele.key == "/" || ele.key == "?") {
+            console.log("j");
+            document.querySelector(`[data-key=sq]`).classList.add("transtart")
+            document.querySelector(`[data-key=sq]`).style.backgroundColor = "#3295DB"
+          }
+          if ("qwertyuiopasdfghjklzxcvbnm".includes(ele.key.toLowerCase())) {
+            document.querySelector(`[data-key=${ele.key.toLowerCase()}]`).classList.add("transtart")
+            document.querySelector(`[data-key=${ele.key.toLowerCase()}]`).style.backgroundColor = "#3295DB"
+          }
+        }
+        if (ele.key == content.innerText[count]) {
+          tempData = tempData.fontcolor("green")
+          content.innerHTML = tempData + content.innerText.substring(count + 1)
+          count++
+        } else {
+          wrgCount++;
+          tempData = content.innerText[count].fontcolor("red")
+          content.innerHTML = content.innerText.substring(0, count) + tempData + content.innerText.substring(count + 1)
+        }
+      }
+    })
+    document.querySelectorAll("#frame div").forEach((ele) => {
+      ele.addEventListener("transitionend", remst)
+    })
+    function remst(e) {
+      this.style.backgroundColor = "white"
+      this.classList.remove("transtart")
+    }
+  </script>
+</body>
+
+</html>
